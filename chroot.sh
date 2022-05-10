@@ -27,7 +27,7 @@ echo "Setting hostname to ${HOSTNAME}"
 echo "${HOSTNAME}" > /etc/hostname
 
 echo "Creating user: ${USR}"
-useradd -m -G wheel,floppy,audio,video,optical,cdrom -s /bin/bash $USR
+useradd -u 2345 -m -G wheel,floppy,audio,video,optical,cdrom -s /bin/bash $USR
 pwconv
 
 echo "Changing password for ${USR}"

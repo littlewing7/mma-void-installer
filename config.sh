@@ -1,5 +1,6 @@
 MKSWAP=0
 MUSL=1
+LUKS=0
 
 ROOTLUKS="tank"
 DATALUKS="data"
@@ -14,7 +15,7 @@ KEYMAP="it"
 
 # Packages
 
-REPO="http://alpha.us.repo.voidlinux.org"
+REPO="http://repo-fi.voidlinux.org"
 REPOS="void-repo-multilib void-repo-multilib-nonfree void-repo-nonfree"
 
 DE="xorg xinit"
@@ -25,5 +26,6 @@ SHELL="bash"
 DEVELOPMENT="base-devel git emacs vim"
 
 PACKAGES="tmux mpd ncmpcpp gnupg2 curl vpsm rsync "
-PACKAGES+=" pulseaudio zip unzip font-iosevka feh python dunst aerc htop ripgrep picom"
+#PACKAGES+=" pulseaudio zip unzip font-iosevka feh python dunst aerc htop ripgrep picom"
+PACKAGES+=" pulseaudio zip unzip font-iosevka feh dunst aerc htop ripgrep picom"
 PACKAGES+=" ${DE} ${DE_EXTRAS} ${SHELL} ${DEVELOPMENT}"

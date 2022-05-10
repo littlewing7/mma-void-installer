@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# Name: Void Linux Installer
+# Authors: Massimo Manzato <massimo.manzato at gmail.com>
+# First Release: 2022, March
+# Description: Alternative install script that replaces the standard Void Linux installer.
+#              Forked from https://github.com/endoffile78/void-installer 
+# License: MIT
+# Version: 202203.01
+
+# Exit immediately if a command exits with a non-zero exit status
+set -e
+
 if [[ $# -ne 3 ]]; then
     echo "Usage: $0 <root disk> <data disk|none> <username>"
     exit 1
@@ -7,7 +18,7 @@ fi
 
 if [[ ! -d /sys/firmware/efi ]];then
     echo "Script set to install uefi compatible bootloader but you did not boot using uefi"
-    exit 1
+    #exit 1
 fi
 
 if [[ $1 == "" ]]; then
@@ -61,9 +72,11 @@ select_partition(){
 }
 
 config_disks(){
+    printf "Root disk: %s \n" "$RDISK" 
     cfdisk $RDISK
 
     if [[ $DDISK != "none" ]]; then
+        printf "Data  disk: %s \n" "$DDISK" 
         cfdisk $DDISK
     fi
 }
