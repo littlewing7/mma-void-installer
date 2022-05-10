@@ -1,5 +1,5 @@
 MKSWAP=0
-MUSL=0
+MUSL=1
 
 ROOTLUKS="tank"
 DATALUKS="data"
@@ -9,21 +9,21 @@ BTRFS_OPTS="rw,noatime,compress=zstd,space_cache"
 INTERFACE="eno1"
 
 HOSTNAME="localhost"
-TIMEZONE="America/Chicago"
-KEYMAP="us"
+TIMEZONE="Europe/Rome"
+KEYMAP="it"
 
 # Packages
 
 REPO="http://alpha.us.repo.voidlinux.org"
 REPOS="void-repo-multilib void-repo-multilib-nonfree void-repo-nonfree"
 
-DE="xfce4 xorg xinit"
-DE_EXTRAS="xfce4-whiskermenu-plugin xfce4-pulseaudio-plugin libreoffice pinentry-gtk gnome-disk-utility greybird-themes connman-gtk firefox alacritty mpv sxiv"
+DE="xorg xinit"
+DE_EXTRAS="pinentry-gtk greybird-themes firefox mpv sxiv"
 
-SHELL="zsh"
+SHELL="bash"
 
-DEVELOPMENT="base-devel git emacs-gtk3 neovim"
+DEVELOPMENT="base-devel git emacs vim"
 
-PACKAGES="tmux mpd ncmpcpp gnupg2 curl vpsm connman rsync "
+PACKAGES="tmux mpd ncmpcpp gnupg2 curl vpsm rsync "
 PACKAGES+=" pulseaudio zip unzip font-iosevka feh python dunst aerc htop ripgrep picom"
 PACKAGES+=" ${DE} ${DE_EXTRAS} ${SHELL} ${DEVELOPMENT}"
