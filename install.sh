@@ -227,7 +227,7 @@ bootstrap
 
 cp ./chroot.sh /mnt/
 cp ./config.sh /mnt/
-cp /etc/reseolv.conf /mnt/etc/resolv.conf
+cp /etc/resolv.conf /mnt/etc/resolv.conf
 
 chroot /mnt ./chroot.sh "$RDISK" "$ROOT" "$BOOT" "$DATA" "$USR"
 
