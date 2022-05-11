@@ -21,7 +21,11 @@ export # Packages
 export ## repo-fi bug close connections after some downloads
 export #REPO="http://repo-fi.voidlinux.org"
 export REPO="http://alpha.de.repo.voidlinux.org"
-export REPOS="void-repo-multilib void-repo-multilib-nonfree void-repo-nonfree"
+if [[ $MUSL -eq 1 ]]; then
+	export REPOS="void-repo-nonfree"
+else 
+	export REPOS="void-repo-multilib void-repo-multilib-nonfree void-repo-nonfree"
+fi 
 
 export DE="xorg xinit"
 export DE_EXTRAS="pinentry-gtk greybird-themes firefox mpv sxiv"
