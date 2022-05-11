@@ -70,12 +70,16 @@ refind-install
 echo "\"Boot with standard options\" \"root=${root_uuid} rootflags=subvol=@ rw quiet initrd=/initramfs-%v.img rd.auto=1 init=/sbin/init vconsole.unicode=1 vconsole.keymap=${KEYMAP}\"" > /boot/refind_linux.conf
 
 # setup extra repos
-xbps-install -Sy $REPOS
+xbps-install -Sy "$REPOS"
 
 # change mirror to one in the united states
 mkdir -p /etc/xbps.d/
 cp /usr/share/xbps.d/*-repository-*.conf /etc/xbps.d/
 sed -i "s|https://alpha.de.repo.voidlinux.org|$REPO|g" /etc/xbps.d/*-repository-*.conf
 
+echo "update all installed packages "
 xbps-install -Syu
-xbps-install -Sy $PACKAGES
+echo "install packages "
+printf "install -Sy %s \n" "$PACKAGES"
+xbps-install -Sy "$PACKAGES"
+printf "exit chroot \n" 
