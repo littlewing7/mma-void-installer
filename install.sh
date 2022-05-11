@@ -68,7 +68,7 @@ select_partition(){
                 break
             fi
         fi
-    done
+done
 }
 
 config_disks(){
@@ -214,12 +214,15 @@ boot_partition
 
 config_disks
 setup_luks
-setup_btrfs
+if [[ $FORMAT -eq 1 ]] ;then 
+	setup_btrfs
+fi
 mount_filesytems
 bootstrap
 
 cp ./chroot.sh /mnt/
 cp ./config.sh /mnt/
+cp /etc/reseolv.conf /mnt/etc/resolv.conf
 
 chroot /mnt ./chroot.sh "$RDISK" "$ROOT" "$BOOT" "$DATA" "$USR"
 
@@ -229,3 +232,4 @@ rm /mnt/chroot.sh /mnt/config.sh
 if [[ $DDISK != "none" ]]; then
     echo "Don't forget to setup /etc/crypttab and dracut"
 fi
+umount -R /mnt 

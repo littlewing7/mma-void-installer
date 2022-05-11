@@ -2,6 +2,9 @@ export MKSWAP=0
 export MUSL=1
 export LUKSROOT=0
 
+##    if set to 1 format fileystem 
+export FORMAT=0
+
 export ROOTLUKS="tank"
 export DATALUKS="data"
 
