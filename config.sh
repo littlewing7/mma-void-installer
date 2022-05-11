@@ -20,7 +20,7 @@ export # Packages
 
 export ## repo-fi bug close connections after some downloads
 export #REPO="http://repo-fi.voidlinux.org"
-export REPO="http://apha.de.repo.voidlinux.org"
+export REPO="http://alpha.de.repo.voidlinux.org"
 export REPOS="void-repo-multilib void-repo-multilib-nonfree void-repo-nonfree"
 
 export DE="xorg xinit"
