@@ -115,11 +115,14 @@ mount_filesytems(){
 
     mount -o "$BTRFS_OPTS",subvol=@home "$ROOT" /mnt/home
 
-    # create seperate subvolumes for log, cache, and tmp to prevent them
-    # from being in snapshots of the root subvolume
-    btrfs subvolume create /mnt/var/log
-    btrfs subvolume create /mnt/var/cache
-    btrfs subvolume create /mnt/var/tmp
+
+    if [[ $FORMAT -eq 1 ]] ;then 
+    		# create seperate subvolumes for log, cache, and tmp to prevent them
+    		# from being in snapshots of the root subvolume
+    		btrfs subvolume create /mnt/var/log
+    		btrfs subvolume create /mnt/var/cache
+    		btrfs subvolume create /mnt/var/tmp
+    fi
 
     mount "$BOOT" /mnt/boot
 
@@ -136,8 +139,10 @@ mount_filesytems(){
         mount -o $BTRFS_OPTS,subvol=@vault "$DATA" /mnt/mnt/vault
         mount -o $BTRFS_OPTS,subvol=@snapshots "$DATA" /mnt/mnt/snapshots
 
-        btrfs subvolume create /mnt/mnt/vault/storage
-        btrfs subvolume create /mnt/mnt/vault/vms
+    	if [[ $FORMAT -eq 1 ]] ;then 
+        	btrfs subvolume create /mnt/mnt/vault/storage
+        	btrfs subvolume create /mnt/mnt/vault/vms
+	fi
     fi
 }
 
