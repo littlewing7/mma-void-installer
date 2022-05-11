@@ -33,12 +33,14 @@ pwconv
 echo "Changing password for ${USR}"
 passwd $USR
 
-echo "Chaning password for root"
+echo "Changing password for root"
 passwd root
 
-echo "LANG=en_US.UTF-8" > /etc/locale.conf
-echo "en_US.UTF-8 UTF-8" >> /etc/default/libc-locales
-xbps-reconfigure -f glibc-locales
+if [[ $MUSL -eq 0 ]] ;then  
+	echo "LANG=en_US.UTF-8" > /etc/locale.conf
+	echo "en_US.UTF-8 UTF-8" >> /etc/default/libc-locales
+	xbps-reconfigure -f glibc-locales
+fi
 
 # setup fstab
 echo "Setting up /etc/fstab"

@@ -1,31 +1,33 @@
-MKSWAP=0
-MUSL=1
-LUKS=0
+export MKSWAP=0
+export MUSL=1
+export LUKSROOT=0
 
-ROOTLUKS="tank"
-DATALUKS="data"
+export ROOTLUKS="tank"
+export DATALUKS="data"
 
-BTRFS_OPTS="rw,noatime,compress=zstd,space_cache"
+export BTRFS_OPTS="rw,noatime,compress=zstd,space_cache"
 
-INTERFACE="eno1"
+export INTERFACE="eno1"
 
-HOSTNAME="localhost"
-TIMEZONE="Europe/Rome"
-KEYMAP="it"
+export HOSTNAME="localhost"
+export TIMEZONE="Europe/Rome"
+export KEYMAP="it"
 
-# Packages
+export # Packages
 
-REPO="http://repo-fi.voidlinux.org"
-REPOS="void-repo-multilib void-repo-multilib-nonfree void-repo-nonfree"
+export ## repo-fi bug close connections after some downloads
+export #REPO="http://repo-fi.voidlinux.org"
+export REPO="http://apha.de.repo.voidlinux.org"
+export REPOS="void-repo-multilib void-repo-multilib-nonfree void-repo-nonfree"
 
-DE="xorg xinit"
-DE_EXTRAS="pinentry-gtk greybird-themes firefox mpv sxiv"
+export DE="xorg xinit"
+export DE_EXTRAS="pinentry-gtk greybird-themes firefox mpv sxiv"
 
-SHELL="bash"
+export SHELL="bash"
 
-DEVELOPMENT="base-devel git emacs vim"
+export DEVELOPMENT="base-devel git emacs vim"
 
-PACKAGES="tmux mpd ncmpcpp gnupg2 curl vpsm rsync "
-#PACKAGES+=" pulseaudio zip unzip font-iosevka feh python dunst aerc htop ripgrep picom"
-PACKAGES+=" pulseaudio zip unzip font-iosevka feh dunst aerc htop ripgrep picom"
-PACKAGES+=" ${DE} ${DE_EXTRAS} ${SHELL} ${DEVELOPMENT}"
+export PACKAGES="tmux mpd ncmpcpp gnupg2 curl vpsm rsync "
+export #PACKAGES+=" pulseaudio zip unzip font-iosevka feh python dunst aerc htop ripgrep picom"
+export PACKAGES+=" pulseaudio zip unzip font-iosevka feh dunst aerc htop ripgrep picom"
+export PACKAGES+=" ${DE} ${DE_EXTRAS} ${SHELL} ${DEVELOPMENT}"
