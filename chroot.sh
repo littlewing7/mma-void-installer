@@ -55,7 +55,7 @@ echo "${root_uuid}  /home btrfs  $BTRFS_OPTS,subvol=@home 0 1" >> /etc/fstab
 echo "${boot_uuid}  /boot  vfat  rw,relatime  0 0" >> /etc/fstab
 
 if [[ $DATA != "" ]]; then
-    data_uuid=$(blkid $DATA --output export | grep "UUID=" | cut -d ' ' -f 2 | tr -d ' ')
+    data_uuid=$(blkid $DATA --output export | grep "^UUID=" | cut -d ' ' -f 2 | tr -d ' ')
     echo "${data_uuid}  /mnt/vault  btrfs $BTRFS_OPTS,subvol=@vault  0 1" >> /etc/fstab
     echo "${data_uuid}  /mnt/snapshots btrfs  $BTRFS_OPTS,subvol=@snapshots 0 1" >> /etc/fstab
     echo "data ${data_uuid} /root/data.key" > /etc/crypttab
@@ -83,5 +83,5 @@ echo "update all installed packages "
 xbps-install -Syu
 echo "install packages "
 printf "install -Sy %s \n" "$PACKAGES"
-xbps-install -Sy "$PACKAGES"
+xbps-install -v -d -Sy "$PACKAGES"
 printf "exit chroot \n" 
