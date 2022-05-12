@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 RDISK=$1
 ROOT=$2
 BOOT=$3
