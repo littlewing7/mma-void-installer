@@ -47,8 +47,8 @@ fi
 # setup fstab
 echo "Setting up /etc/fstab"
 
-root_uuid=$(blkid $ROOT --output export | grep "UUID=" | cut -d ' ' -f 2 | tr -d ' ')
-boot_uuid=$(blkid $BOOT --output export | grep "UUID=" | cut -d ' ' -f 2 | tr -d ' ')
+root_uuid=$(blkid $ROOT --output export | grep "^UUID=" | cut -d ' ' -f 2 | tr -d ' ')
+boot_uuid=$(blkid $BOOT --output export | grep "^UUID=" | cut -d ' ' -f 2 | tr -d ' ')
 
 echo "${root_uuid}  / btrfs  $BTRFS_OPTS,subvol=@ 0 1" > /etc/fstab
 echo "${root_uuid}  /home btrfs  $BTRFS_OPTS,subvol=@home 0 1" >> /etc/fstab
