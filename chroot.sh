@@ -29,11 +29,11 @@ echo "Setting hostname to ${HOSTNAME}"
 echo "${HOSTNAME}" > /etc/hostname
 
 echo "Creating user: ${USR}"
-useradd -u 2345 -m -G wheel,floppy,audio,video,optical,cdrom -s /bin/bash $USR
+useradd -u 2345 -m -G wheel,floppy,audio,video,optical,cdrom -s /bin/bash "$USR"
 pwconv
 
 echo "Changing password for ${USR}"
-passwd $USR
+passwd "$USR"
 
 echo "Changing password for root"
 passwd root
@@ -83,5 +83,5 @@ echo "update all installed packages "
 xbps-install -Syu
 echo "install packages "
 printf "install -Sy %s \n" "$PACKAGES"
-xbps-install -v -d -Sy "$PACKAGES"
+xbps-install -v -d -Sy $PACKAGES
 printf "exit chroot \n" 
