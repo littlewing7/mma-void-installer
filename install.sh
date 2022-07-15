@@ -159,7 +159,7 @@ setup_btrfs(){
 }
 
 boot_partition(){
-    PS3="Do you need to create a boot partion: "
+    PS3="Do you need to format boot partion: "
     options=("y" "n")
     select opt in "${options[@]}"; do
         case "$opt" in
@@ -231,4 +231,5 @@ rm /mnt/chroot.sh /mnt/config.sh
 if [[ $DDISK != "none" ]]; then
     echo "Don't forget to setup /etc/crypttab and dracut"
 fi
+printf "ALL finished!!\n\n    Unmounting disks: unmount -R /mnt"
 umount -R /mnt

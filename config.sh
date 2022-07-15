@@ -8,7 +8,9 @@ export FORMAT=0
 export ROOTLUKS="tank"
 export DATALUKS="data"
 
-export BTRFS_OPTS="rw,noatime,compress=zstd,space_cache"
+#export BTRFS_OPTS="rw,noatime,compress=zstd,space_cache"
+### removed space_cache for incompatibility with btrfstools 5.15 and higher
+export BTRFS_OPTS="rw,noatime,compress=zstd"
 
 export INTERFACE="eno1"
 

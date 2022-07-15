@@ -38,6 +38,11 @@ passwd "$USR"
 echo "Changing password for root"
 passwd root
 
+sed -i.bak -E \
+  "/%wheel ALL=\(ALL\) ALL/s/^#[[:space:]]//g" \
+  /mnt/etc/sudoers
+
+
 if [[ $MUSL -eq 0 ]] ;then
 	echo "LANG=en_US.UTF-8" > /etc/locale.conf
 	echo "en_US.UTF-8 UTF-8" >> /etc/default/libc-locales
@@ -84,4 +89,15 @@ xbps-install -Syu
 echo "install packages "
 printf "install -Sy %s \n" "$PACKAGES"
 xbps-install -v -d -Sy "$PACKAGES"
+
+kickstart_script_url=https://github.com/littlewing7/mma-install-scripts/blob/master/kickstart/kickstart-void.sh
+
+if [ -n "${kickstart_script_url}" ]; then
+    say "Downloading kickstart script to user's home directory"
+    wget ${kickstart_script_url} -O /mnt/home/${user}/kickstart.sh
+    chroot_run chown ${user}:${user} /home/${user}/kickstart.sh
+    chroot_run chmod +x /home/${user}/kickstart.sh
+fi
+
+
 printf "exit chroot \n"
