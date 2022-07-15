@@ -38,7 +38,7 @@ passwd "$USR"
 echo "Changing password for root"
 passwd root
 
-if [[ $MUSL -eq 0 ]] ;then  
+if [[ $MUSL -eq 0 ]] ;then
 	echo "LANG=en_US.UTF-8" > /etc/locale.conf
 	echo "en_US.UTF-8 UTF-8" >> /etc/default/libc-locales
 	xbps-reconfigure -f glibc-locales
@@ -47,15 +47,15 @@ fi
 # setup fstab
 echo "Setting up /etc/fstab"
 
-root_uuid=$(blkid $ROOT --output export | grep "^UUID=" | cut -d ' ' -f 2 | tr -d ' ')
-boot_uuid=$(blkid $BOOT --output export | grep "^UUID=" | cut -d ' ' -f 2 | tr -d ' ')
+root_uuid=$(blkid "$ROOT" --output export | grep "^UUID=" | cut -d ' ' -f 2 | tr -d ' ')
+boot_uuid=$(blkid "$BOOT" --output export | grep "^UUID=" | cut -d ' ' -f 2 | tr -d ' ')
 
 echo "${root_uuid}  / btrfs  $BTRFS_OPTS,subvol=@ 0 1" > /etc/fstab
 echo "${root_uuid}  /home btrfs  $BTRFS_OPTS,subvol=@home 0 1" >> /etc/fstab
 echo "${boot_uuid}  /boot  vfat  rw,relatime  0 0" >> /etc/fstab
 
 if [[ $DATA != "" ]]; then
-    data_uuid=$(blkid $DATA --output export | grep "^UUID=" | cut -d ' ' -f 2 | tr -d ' ')
+    data_uuid=$(blkid "$DATA" --output export | grep "^UUID=" | cut -d ' ' -f 2 | tr -d ' ')
     echo "${data_uuid}  /mnt/vault  btrfs $BTRFS_OPTS,subvol=@vault  0 1" >> /etc/fstab
     echo "${data_uuid}  /mnt/snapshots btrfs  $BTRFS_OPTS,subvol=@snapshots 0 1" >> /etc/fstab
     echo "data ${data_uuid} /root/data.key" > /etc/crypttab
@@ -83,5 +83,5 @@ echo "update all installed packages "
 xbps-install -Syu
 echo "install packages "
 printf "install -Sy %s \n" "$PACKAGES"
-xbps-install -v -d -Sy $PACKAGES
-printf "exit chroot \n" 
+xbps-install -v -d -Sy "$PACKAGES"
+printf "exit chroot \n"

@@ -1,11 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# Name: Void Linux Installer
-# Authors: Massimo Manzato <massimo.manzato at gmail.com>
-# First Release: 2022, March
-# Description: Alternative install script that replaces the standard Void Linux installer.
-#              Forked from https://github.com/endoffile78/void-installer 
-# License: MIT
 # Version: 202203.01
 
 # Exit immediately if a command exits with a non-zero exit status
@@ -72,11 +66,11 @@ done
 }
 
 config_disks(){
-    printf "Root disk: %s \n" "$RDISK" 
+    printf "Root disk: %s \n" "$RDISK"
     cfdisk "$RDISK"
 
     if [[ $DDISK != "none" ]]; then
-        printf "Data  disk: %s \n" "$DDISK" 
+        printf "Data  disk: %s \n" "$DDISK"
         cfdisk "$DDISK"
     fi
 }
@@ -89,7 +83,7 @@ setup_luks(){
     	cryptsetup luksFormat "$PARTITION"
     	cryptsetup open "$PARTITION" "$ROOTLUKS"
     	ROOT=/dev/mapper/$ROOTLUKS
-    else 
+    else
 	ROOT=$PARTITION
     fi
 
@@ -103,7 +97,7 @@ setup_luks(){
 
         DATA=/dev/mapper/$DATALUKS
     fi
-    
+
     #to be removed if work LUKSROOT
     #ROOT=/dev/mapper/$ROOTLUKS
 }
@@ -116,7 +110,7 @@ mount_filesytems(){
     mount -o "$BTRFS_OPTS",subvol=@home "$ROOT" /mnt/home
 
 
-    if [[ $FORMAT -eq 1 ]] ;then 
+    if [[ $FORMAT -eq 1 ]] ;then
     		# create seperate subvolumes for log, cache, and tmp to prevent them
     		# from being in snapshots of the root subvolume
     		btrfs subvolume create /mnt/var/log
@@ -139,7 +133,7 @@ mount_filesytems(){
         mount -o $BTRFS_OPTS,subvol=@vault "$DATA" /mnt/mnt/vault
         mount -o $BTRFS_OPTS,subvol=@snapshots "$DATA" /mnt/mnt/snapshots
 
-    	if [[ $FORMAT -eq 1 ]] ;then 
+    	if [[ $FORMAT -eq 1 ]] ;then
         	btrfs subvolume create /mnt/mnt/vault/storage
         	btrfs subvolume create /mnt/mnt/vault/vms
 	fi
@@ -219,7 +213,7 @@ boot_partition
 
 config_disks
 setup_luks
-if [[ $FORMAT -eq 1 ]] ;then 
+if [[ $FORMAT -eq 1 ]] ;then
 	setup_btrfs
 fi
 mount_filesytems
@@ -237,4 +231,4 @@ rm /mnt/chroot.sh /mnt/config.sh
 if [[ $DDISK != "none" ]]; then
     echo "Don't forget to setup /etc/crypttab and dracut"
 fi
-umount -R /mnt 
+umount -R /mnt

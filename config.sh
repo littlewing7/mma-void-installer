@@ -21,11 +21,11 @@ export # Packages
 export ## repo-fi bug close connections after some downloads
 export #REPO="http://repo-fi.voidlinux.org"
 export REPO="http://alpha.de.repo.voidlinux.org"
-if [[ $MUSL -eq 1 ]]; then
+if [ "$MUSL" -eq 1 ]; then
 	export REPOS="void-repo-nonfree"
-else 
+else
 	export REPOS="void-repo-multilib void-repo-multilib-nonfree void-repo-nonfree"
-fi 
+fi
 
 export DE="xorg xinit"
 export DE_EXTRAS="pinentry-gtk greybird-themes firefox mpv sxiv"
@@ -37,4 +37,5 @@ export DEVELOPMENT="base-devel git emacs vim"
 export PACKAGES="tmux mpd ncmpcpp gnupg2 curl vpsm rsync "
 export #PACKAGES+=" pulseaudio zip unzip font-iosevka feh python dunst aerc htop ripgrep picom"
 export PACKAGES+=" pulseaudio zip unzip font-iosevka feh dunst aerc htop ripgrep picom"
+export PACKAGES+=" keychain wireguard bash-completion ModemManager screen wpa_gui hostapd dnsmasq socklog socklog-void iperf3 neofetch powertop arp-scan iptraf-ng iftop tcpdump"
 export PACKAGES+=" ${DE} ${DE_EXTRAS} ${SHELL} ${DEVELOPMENT}"
